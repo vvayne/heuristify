@@ -49,7 +49,7 @@ passport.use(User.createStrategy());
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-mongoose.connect('mongodb://localhost/tutorrank');
+mongoose.connect('mongodb://localhost/heuristify');
 
 var tester = User.find({username : "bob"}, function(err, p){
     if (err) console.log("didn't find bob");

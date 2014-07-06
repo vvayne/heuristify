@@ -19,7 +19,8 @@ router.get('/register', function(req, res) {
 
 
 router.post('/register', function(req, res) {
-  console.log((req.body.password).length);
+  console.log(req.body.username);
+  console.log(req.body.password);
   if((req.body.password).length < 4){
     return res.render("register", {info: "Get a longer password"});
   }
