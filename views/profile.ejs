@@ -27,18 +27,18 @@
 					<p>
 
 						<strong>Username</strong>: <%= user.username %><br>
-						<strong>About Me: </strong><%=user.whoami %><br>
-						<strong>Profile Type:</strong>
 						<% if (user.prof_type) { %>
 							Tutor
 						<% } else { %>
 								Student
 						<% } %><br>
-						<strong>University: </strong><%=user.education %><br>
-						<strong>Graduation Year: </strong><%=user.graduation %><br>
-						<strong>Categories interested in</strong> 
+						<strong>Tasks at hand</strong> 
 						<%for (var i = 0; i < user.categories.length; i++) { %>
-						<%= user.categories[i].toString() %>
+
+						<p>Task Name: <%= user.categories[i].taskname %><br>
+						Task Priority: <%= user.categories[i].taskpriority %> <br>
+						 Task Duration: <%= user.categories[i].taskduration %> </p>
+						<br>
 						<% } %>
 
 

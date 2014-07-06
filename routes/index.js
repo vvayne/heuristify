@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var passport = require('passport');
 var User = require('../models/user');
+var Task = require('../models/task');
 /* GET home page. */
 
 
@@ -59,37 +60,27 @@ router.get('/update', isLoggedIn, function(req, res) {
 });
 
 router.post('/update/:id', function(req, res) {
-  var profile_type = req.body.prof_type;
   var category_fields = req.body.increment;
+
   console.log("The number of fields is " + category_fields);
   var category_holder = [];
-  var category_holder_key = [];
   console.log(category_holder);
   for (var i = 0; i < category_fields; i++) {
-    var itemtopush = req.body['category'+i];
-    console.log("The number item is" + i + "the item itself is" + itemtopush);
-    var category_number = itemtopush;
-    if (category_number) {
-      category_holder.push(category_number);
-      category_holder_key.push(category_number.toLowerCase());
+    var task = new Task({
+    taskname : req.body['category'+i+'name'],
+    taskduration : req.body['category'+i+'priority'],
+    taskpriority : req.body['category'+i+'duration']
+    });
+    if (task) {
+      category_holder.push(task);
     }
   }
-  var pic = req.body.profilepic;
-  var aboutme = req.body.whoami;
-  var school = req.body.education;
-  var year = req.body.graduation;
+
   User.findById(req.params.id,function(err, userup){
     if (!userup)
       return next(new Error("Couldn't load user"));
     else {
-      userup.prof_type = profile_type;
-      userup.profilepic = pic;
-      userup.whoami = aboutme;
-      userup.education = school;
-      userup.graduation = year;
-      userup.education_key = school.toLowerCase();
       userup.categories = category_holder;
-      userup.categories_key = category_holder_key;
       userup.save(function(err) {
         if (err)
           console.log('error on update');

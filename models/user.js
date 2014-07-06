@@ -7,14 +7,7 @@ var User = new Schema({
 	username: String,
 	password: String,
 	prof_type: Boolean,
-	whoami: String,
-	categories: [],
-	categories_key: [],
-	profilepic: String,
-	education: String,
-	education_key: String,
-	graduation: Number
-
+	categories : []
 	//add into the model update field in update
 	//add into profile views
 

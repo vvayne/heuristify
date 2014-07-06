@@ -15,7 +15,12 @@
 			$(".lolz").click(function(){
 				var insert = '<div class="form-group">' +
              		'<input type="text" class="form-control" name="category' + i + 
-             		'" value="test' + i + '"></div>';
+             		'name" value="test' + i + '">' +
+             		'<input type="number" class="form-control" name="category' + i + 
+             		'priority" value="test' + i + 'min="1" max="3"">' +
+             		'<input type="number" class="form-control" name="category' + i + 
+             		'duration" value="test' + i + ' min="0" max="24"></div>'
+             		;
 				i = i+1;
 				$("#submitted").before(insert)
 				$("#hidden").val(i);
@@ -42,37 +47,20 @@
 			<h1> test </h1>
 
 			<form action="/update/<%=user._id%>" method="post" id="adding">
-				<div class="form-group">
-					<h2> Pick a type of profile</h2>
-					<input type="radio" class="form-control" name="prof_type" value="true" <%if (user.prof_type) { %>checked = "checked"<% } %>
-					>Tutor<br>
-					<input type="radio" class="form-control" name="prof_type" value="false"<%if (!user.prof_type) { %>checked = "checked"<% } %>
-					>Student
-				</div>
-				<input type="hidden" id="hidden" name="increment" value="<%=user.categories.length %>">
-				<div class="form-group">
-					<label>Link to profile picture</label>
-					<input type="text" class="form-control" name="profilepic" value="<%=user.profilepic %>">
-				</div>
-				<div class="form-group">
-					<label>University</label>
-					<input type="text" class="form-control" name="education" value="<%=user.education %>">
-				</div>
-				<div class="form-group">
-					<label>Graduation Year</label>
-					<input type="number" class="form-control" min="1970" max="2020" name="graduation" value="<%=user.graduation %>">
-				</div>
-				<div class="form-group">
-					<label>About me</label>
-					<textarea name="whoami" class="form-control"><%=user.whoami %></textarea>
-				</div>
+
+				<input type="hidden" id="hidden" name="increment" value="<%=user.categories.length %>"> 
 				<button type="button" class="lolz">Add Category</button>
 				<br>
              	<%for (var i = 0; i < user.categories.length; i++) {%>
              	<div class="form-group">
-             		<input type="text" class="form-control" name="category<%=i %>" value="<%=user.categories[i] %>">
+             	<input type="text" class="form-control" name="category<%=i %>name" value="<%=user.categories[i].taskname%>" placeholder = "Enter task name">
+				<input type="number" class="form-control" name="category<%=i %>priority" value="<%=user.categories[i].taskpriority%>" placeholder = "Enter task priority" min="1" max="3">
+				<input type="number" class="form-control" name="category<%=i %>duration" value="<%=user.categories[i].taskduration%>" placeholder = "Enter task duration" min="0" max="24">
+             		<!--<input type="text" class="form-control" name="category<%=i %>" value="<%=user.categories[i] %>"> -->
              	</div>
              	<%} %>
+				<div>
+				Build a Task
 
 
 				<button type="submit" class="btn btn-warning btn-lg" id = "submitted">Update</button>
