@@ -1,0 +1,62 @@
+<!doctype html>
+<html>
+<head>
+	<title>Node Authentication</title>
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+	<style>
+		body 		{ padding-top:80px; word-wrap:break-word; }
+	</style>
+</head>
+<body>
+	<div class="container">
+
+		<div class="page-header text-center">
+			<h1><span class="fa fa-anchor"></span> Profile Page</h1>
+			<a href="/logout" class="btn btn-default btn-sm">Logout</a>
+		</div>
+
+		<div class="row">
+
+			<!-- LOCAL INFORMATION -->
+			<div class="col-sm-6">
+				<div class="well">
+					<h3><span class="fa fa-user"></span> Local</h3>
+					<img src="<%= user.profilepic %>" height="300" width="300">
+
+					<p>
+
+						<strong>Username</strong>: <%= user.username %><br>
+						<strong>About Me: </strong><%=user.whoami %><br>
+						<strong>Profile Type:</strong>
+						<% if (user.prof_type) { %>
+							Tutor
+						<% } else { %>
+								Student
+						<% } %><br>
+						<strong>University: </strong><%=user.education %><br>
+						<strong>Graduation Year: </strong><%=user.graduation %><br>
+						<strong>Categories interested in</strong> 
+						<%for (var i = 0; i < user.categories.length; i++) { %>
+						<%= user.categories[i].toString() %>
+						<% } %>
+
+
+	
+						
+
+
+
+
+					</p>
+
+				</div>
+			</div>
+
+			<a href="/update">Update User information</a>
+
+		</div>
+
+	</div>
+</body>
+</html>

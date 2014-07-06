@@ -1,0 +1,87 @@
+<!doctype html>
+<html>
+<head>
+	<title>Node Authentication</title>
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+	<style>
+		body 		{ padding-top:80px; word-wrap:break-word; }
+	</style>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script>
+		$("document").ready(function(){
+			var i = <%=user.categories.length %>;
+
+			$(".lolz").click(function(){
+				var insert = '<div class="form-group">' +
+             		'<input type="text" class="form-control" name="category' + i + 
+             		'" value="test' + i + '"></div>';
+				i = i+1;
+				$("#submitted").before(insert)
+				$("#hidden").val(i);
+//				alert($("#hidden").val());
+
+			});
+		});
+	</script>
+</head>
+<body>
+<h1 class="test"></h1>
+	<div class="container">
+
+		<div class="page-header text-center">
+			<h1><span class="fa fa-anchor"></span> Profile Page</h1>
+			<a href="/logout" class="btn btn-default btn-sm">Logout</a>
+		</div>
+<h1 class="lolz"></h1>
+
+
+		<div class="row">
+
+			<!-- LOCAL INFORMATION -->
+			<h1> test </h1>
+
+			<form action="/update/<%=user._id%>" method="post" id="adding">
+				<div class="form-group">
+					<h2> Pick a type of profile</h2>
+					<input type="radio" class="form-control" name="prof_type" value="true" <%if (user.prof_type) { %>checked = "checked"<% } %>
+					>Tutor<br>
+					<input type="radio" class="form-control" name="prof_type" value="false"<%if (!user.prof_type) { %>checked = "checked"<% } %>
+					>Student
+				</div>
+				<input type="hidden" id="hidden" name="increment" value="<%=user.categories.length %>">
+				<div class="form-group">
+					<label>Link to profile picture</label>
+					<input type="text" class="form-control" name="profilepic" value="<%=user.profilepic %>">
+				</div>
+				<div class="form-group">
+					<label>University</label>
+					<input type="text" class="form-control" name="education" value="<%=user.education %>">
+				</div>
+				<div class="form-group">
+					<label>Graduation Year</label>
+					<input type="number" class="form-control" min="1970" max="2020" name="graduation" value="<%=user.graduation %>">
+				</div>
+				<div class="form-group">
+					<label>About me</label>
+					<textarea name="whoami" class="form-control"><%=user.whoami %></textarea>
+				</div>
+				<button type="button" class="lolz">Add Category</button>
+				<br>
+             	<%for (var i = 0; i < user.categories.length; i++) {%>
+             	<div class="form-group">
+             		<input type="text" class="form-control" name="category<%=i %>" value="<%=user.categories[i] %>">
+             	</div>
+             	<%} %>
+
+
+				<button type="submit" class="btn btn-warning btn-lg" id = "submitted">Update</button>
+
+			</form>
+
+
+		</div>
+
+	</div>
+</body>
+</html>
